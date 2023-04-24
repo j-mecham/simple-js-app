@@ -1,0 +1,20 @@
+:root {
+    --background-color: #8bc5cd;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: var(--background-color);
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 700;
+}
