@@ -21,47 +21,49 @@ let pokemonRepository = (function () {
             types: ['field']
         }
     ]
+
     function getAll () {
         return pokemonList;
     }
+
     function add (pokemon) {
         pokemonList.push(pokemon);
     }
+
+    // This function logs the pokemon object to the DOM
+    function showDetails(pokemon) {
+        console.log(pokemon);
+    }
+
+    /*This function identifies and fills the HTML ul with 
+    li items that are buttons which listen for clicks. 
+    When clicked they log that specific pokemon object to the
+    DOM. It also makes the button have appropriate inner text and 
+    adds a class to each for CSS.*/
+    function addListItem(pokemon){
+        let pokemonList = document.querySelector('.pokemon-list');
+        let listPokemon = document.createElement('li');
+        let button = document.createElement('button');
+        button.addEventListener('click', function () {
+            showDetails(pokemon);
+        });
+        button.innerText = pokemon.name;
+        button.classList.add("button-class");
+        listPokemon.appendChild(button);
+        pokemonList.appendChild(listPokemon);
+    }
     return {
         getAll: getAll,
-        add: add
+        add: add,
+        addListItem: addListItem,
+        showDetails: showDetails
     }
 })();
 
 console.log(pokemonRepository.getAll())
 
-/*
-    This loop iterates over the array 
-    and writes to the document the name and 
-    height of the pokemon.
-    It also checks the height value and sends a message
-    if the pokemon is taller than 11
-*/
-/*for (let i = 0; i < pokemonList.length; i++) {
-    let name = pokemonList[i].name;
-    let height = pokemonList[i].height;
-    document.write(name + ' (height: ' + height + ')');
-    if (height > 11) {
-        document.write(' - Wow, that\'s big!')
-    }
-    document.write('<br><br>');
-}
-*/
+pokemonRepository.getAll().forEach(function (pokemon) {
+    pokemonRepository.addListItem(pokemon);
+});
 
-function getPokeInfo(poke) {
-    let name = poke.name;
-    let height = poke.height;
-    document.write(name + ' (height: ' + height + ')');
-    if (height > 11) {
-        document.write(' - Wow, that\'s big!')
-    }
-    document.write('<br><br>')
-}
-
-pokemonRepository.getAll().forEach(getPokeInfo)
 
