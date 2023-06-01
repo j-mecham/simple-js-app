@@ -10,12 +10,67 @@ let pokemonRepository = (function () {
         pokemonList.push(pokemon);
     }
 
-    // This function logs the pokemon object to the DOM
+    // This function opens a modal to display the information of the pokemon that is clicked
     function showDetails(pokemon) {
         loadDetails(pokemon).then(function () {
-            console.log(pokemon);
+            let modalContainer = document.querySelector('#modal-container');
+
+            //clear all existing modal content
+            modalContainer.innerHTML = '';
+
+            let modal = document.createElement('div');
+            modal.classList.add('modal');
+
+            // Add the new modal content
+            let closeButtonElement = document.createElement('button');
+            closeButtonElement.classList.add('modal-close');
+            closeButtonElement.innerText= 'Close';
+            closeButtonElement.addEventListener('click', function () {
+                hideModal();
+            });
+
+            let titleElement = document.createElement('h1');
+            titleElement.innerText = pokemon.name;
+
+            let pokemonImage = document.createElement('img');
+            pokemonImage.src = pokemon.imageUrl;
+
+            let contentElement = document.createElement('p');
+            contentElement.innerText = "Height: " + pokemon.height;
+
+            modal.appendChild(closeButtonElement);
+            modal.appendChild(titleElement);
+            modal.appendChild(pokemonImage);
+            modal.appendChild(contentElement);
+            modalContainer.appendChild(modal);
+
+            
+            modalContainer.classList.add('is-visible');
+
+            modalContainer.addEventListener('click', (e) => {
+                // Since this is also triggered when clicking INSIDE the modal
+                // We only want to close if the user clicks directly on the overlay
+                let target = e.target;
+                if (target === modalContainer) {
+                    hideModal();
+                }
+            });
         });
     }
+
+    // This function will hide the modal if it is visible
+    function hideModal() {
+        let modalContainer = document.querySelector('#modal-container');
+        modalContainer.classList.remove('is-visible');
+    }
+
+    // this Listener will hide the modal if a click outside the modal is detected or the escape key is clicked
+    window.addEventListener('keydown', (e) => {
+        let modalContainer = document.querySelector('#modal-container');
+        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+          hideModal();  
+        }
+    });
 
     /*This function identifies and fills the HTML ul with 
     li items that are buttons which listen for clicks. 
@@ -67,13 +122,8 @@ let pokemonRepository = (function () {
         });
     }
 
-    return {
-        getAll: getAll,
-        add: add,
-        addListItem: addListItem,
-        showDetails: showDetails,
-        loadList: loadList,
-        loadDetails: loadDetails
+    return { 
+        getAll, add, addListItem, showDetails, loadList, loadDetails, hideModal
     };
 })();
 
