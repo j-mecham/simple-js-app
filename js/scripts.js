@@ -35,13 +35,25 @@ let pokemonRepository = (function () {
             let pokemonImage = document.createElement('img');
             pokemonImage.src = pokemon.imageUrl;
 
-            let contentElement = document.createElement('p');
-            contentElement.innerText = "Height: " + pokemon.height;
+            let heightElement = document.createElement('p');
+            heightElement.innerText = "Height: " + pokemon.height;
+
+            let weightElement = document.createElement('p');
+            weightElement.innerText = "Weight: " + pokemon.weight;
+
+            let typesElement = document.createElement('p');
+            function getAllTypes (pokemon) {
+                console.log(pokemon.type.name)
+                return [pokemon.type.name]
+            };
+            typesElement.innerText = "Type(s): " + pokemon.types.map(getAllTypes).join(', ');
 
             modal.appendChild(closeButtonElement);
             modal.appendChild(titleElement);
             modal.appendChild(pokemonImage);
-            modal.appendChild(contentElement);
+            modal.appendChild(heightElement);
+            modal.appendChild(weightElement);
+            modal.appendChild(typesElement);
             modalContainer.appendChild(modal);
 
             
@@ -78,14 +90,15 @@ let pokemonRepository = (function () {
     DOM. It also makes the button have appropriate inner text and 
     adds a class to each for CSS.*/
     function addListItem(pokemon){
-        let pokemonList = document.querySelector('.pokemon-list');
+        let pokemonList = document.querySelector('.list-group');
         let listPokemon = document.createElement('li');
+        listPokemon.classList.add('list-group-item')
         let button = document.createElement('button');
         button.addEventListener('click', function () {
             showDetails(pokemon);
         });
         button.innerText = pokemon.name;
-        button.classList.add("button-class");
+        button.classList.add("btn-primary");
         listPokemon.appendChild(button);
         pokemonList.appendChild(listPokemon);
     }
@@ -116,6 +129,7 @@ let pokemonRepository = (function () {
             //now we add the details to the item
             item.imageUrl = details.sprites.front_default;
             item.height = details.height;
+            item.weight = details.weight;
             item.types = details.types;
         }).catch(function (e) {
             console.error(e);
