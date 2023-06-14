@@ -59,8 +59,10 @@ h1 {
 .modal-close {
     float: right;
     -webkit-appearance: none;
+    appearance: none;
     border: 0;
     background: none;
+    cursor: pointer;
     color: #777;
     text-decoration: underline;
 }
