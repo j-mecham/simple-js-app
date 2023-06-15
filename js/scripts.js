@@ -12,67 +12,42 @@ let pokemonRepository = (function () {
 
     
     function showDetails(pokemon) {
-        // loadDetails(pokemon).then(function () {
-        //     showModal(pokemon);
-        // });
+        loadDetails(pokemon).then(function () {
+            showModal(pokemon);
+        });
     }
 
     // This function opens a modal to display the information of the pokemon that is clicked
     function showModal(item) {
         let modalBody = $(".modal-body");
         let modalTitle = $(".modal-title");
-        let modalHeader = $(".modal-header");
-        //let modalContainer = document.querySelector('#modal-container');
 
         //clear all existing modal content
-        //modalContainer.innerHTML = '';
         modalTitle.empty();
         modalBody.empty();
 
-        /*let modal = document.createElement('div');
-        modal.classList.add('modal');*/
-
-        // Add the new modal content
-        //let closeButtonElement = document.createElement('button');
-        //closeButtonElement.classList.add('modal-close');
-        //closeButtonElement.innerText= 'Close';
-        //closeButtonElement.addEventListener('click', function () {
-        //    hideModal();
-        //});
-
+        // Set the new modal content
         let titleElement = $("<h1>" + item.name + "</h1>");
 
         let pokemonImage = $("<img class='modal-img' style='width:50%';>");
+        pokemonImage.attr("src", item.imageUrl);
 
         let heightElement = $("<p>" + "Height: " + item.height + "</p>");
 
         let weightElement = $("<p>" + "Weight: " + item.weight + "</p>");
 
-        let typesElement = $("<p>" + "Type(s): " + pokemon.types.map(getAllTypes).join(', ') + "</p>");
+        let typesElement = $("<p>" + "Type(s): " + item.types.map(getAllTypes).join(', ') + "</p>");
         function getAllTypes (item) {
             console.log(item.type.name)
             return [item.type.name]
         };
 
-        //modal.appendChild(closeButtonElement);
+        //Add modal Content to the modal
         modalTitle.append(titleElement);
         modalBody.append(pokemonImage);
         modalBody.append(heightElement);
         modalBody.append(weightElement);
         modalBody.append(typesElement);
-        //modalContainer.appendChild(modal);
-
-        
-       /* modalContainer.classList.add('is-visible');
-
-        modalContainer.addEventListener('click', (e) => {
-            // Since this is also triggered when clicking INSIDE the modal
-            // We only want to close if the user clicks directly on the overlay
-            let target = e.target;
-            if (target === modalContainer) {
-                hideModal();
-            }
-        });*/
     }
 
     // This function will hide the modal if it is visible
