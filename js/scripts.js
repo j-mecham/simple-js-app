@@ -27,7 +27,7 @@ let pokemonRepository = (function () {
         modalBody.empty();
 
         // Set the new modal content
-        let titleElement = $("<h1>" + item.name + "</h1>");
+        let titleElement = $("<h1>" + item.name.charAt(0).toUpperCase() + item.name.slice(1) + "</h1>");
 
         let pokemonImage = $("<img class='modal-img' style='width:50%';>");
         pokemonImage.attr("src", item.imageUrl);
@@ -50,20 +50,6 @@ let pokemonRepository = (function () {
         modalBody.append(typesElement);
     }
 
-    // This function will hide the modal if it is visible
-    function hideModal() {
-        let modalContainer = document.querySelector('#modal-container');
-        modalContainer.classList.remove('is-visible');
-    }
-
-    // this Listener will hide the modal if a click outside the modal is detected or the escape key is clicked
-    window.addEventListener('keydown', (e) => {
-        let modalContainer = document.querySelector('#modal-container');
-        if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
-          hideModal();  
-        }
-    });
-
     /*This function identifies and fills the HTML ul with 
     li items that are buttons which listen for clicks. 
     When clicked they log that specific pokemon object to the
@@ -73,11 +59,11 @@ let pokemonRepository = (function () {
         let pokemonList = document.querySelector('.list-group');
         let listPokemon = document.createElement('li');
         listPokemon.classList.add('list-group-item')
-        let button = document.createElement('btn', 'btn-primary');
+        let button = document.createElement('btn');
         button.setAttribute('data-toggle', 'modal');
         button.setAttribute('data-target', '#exampleModal');
-        button.innerText = pokemon.name;
-        button.classList.add("btn-primary");
+        button.innerText = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+        button.classList.add("btn-primary", "btn-block");
         listPokemon.appendChild(button);
         pokemonList.appendChild(listPokemon);
         button.addEventListener('click', function () {
@@ -119,7 +105,7 @@ let pokemonRepository = (function () {
     }
 
     return { 
-        getAll, add, addListItem, showDetails, loadList, loadDetails, showModal, hideModal
+        getAll, add, addListItem, showDetails, loadList, loadDetails, showModal
     };
 })();
 
