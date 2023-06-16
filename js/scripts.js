@@ -63,7 +63,7 @@ let pokemonRepository = (function () {
         button.setAttribute('data-toggle', 'modal');
         button.setAttribute('data-target', '#exampleModal');
         button.innerText = pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
-        button.classList.add("btn-primary", "btn-block");
+        button.classList.add("btn", "btn-block");
         listPokemon.appendChild(button);
         pokemonList.appendChild(listPokemon);
         button.addEventListener('click', function () {

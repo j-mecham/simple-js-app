@@ -1,23 +1,46 @@
+:root {
+  --poke-dark-blue: #020659;
+  --poke-blue: #373ca6;
+  --poke-yellow: #f2c230;
+  --poke-tan: #d99f6c;
+  --poke-black: #0d0d0d;
+  --poke-gray: #d6d6d6;
+}
+
+body {
+  background-color: var(--poke-gray);
+}
+
+.d-inline-block {
+  margin-top: 20px;
+}
 .modal-content {
     text-align: center;
 }
 
 .navbar {
     justify-content: center;
+    background-color: var(--poke-gray);
 }
 
 .list-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(5, 1fr);
-    margin: 30px;
 }
   
   .list-group-item {
     list-style-type: none;
     text-align: center;
+    margin: 30px;
+    background-color: var(--poke-blue);
+    border-radius: 2px;
   }
 
-  .btn-primary:hover {
+  .btn {
     cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--poke-yellow);
   }
