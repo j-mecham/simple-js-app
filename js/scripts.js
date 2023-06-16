@@ -36,7 +36,7 @@ let pokemonRepository = (function () {
 
         let weightElement = $("<p>" + "Weight: " + item.weight + "</p>");
 
-        let typesElement = $("<p>" + "Type(s): " + item.types.map(getAllTypes).join(', ') + "</p>");
+        let typesElement = $(`<p>Type(s): ${item.types.map(getAllTypes).join(', ')}</p>`);
         function getAllTypes (item) {
             console.log(item.type.name)
             return [item.type.name]
@@ -66,7 +66,7 @@ let pokemonRepository = (function () {
         button.classList.add("btn", "btn-block");
         listPokemon.appendChild(button);
         pokemonList.appendChild(listPokemon);
-        button.addEventListener('click', function () {
+        button.addEventListener("click", function () {
             showDetails(pokemon);
         });
     }
