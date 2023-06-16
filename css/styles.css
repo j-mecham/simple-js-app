@@ -19,6 +19,19 @@ body {
   text-align: center;
 }
 
+.modal-header {
+  background-color: var(--poke-dark-blue);
+  color: var(--poke-gray);
+}
+
+.modal-body {
+  background-color: var(--poke-yellow);
+  color: var(--poke-dark-blue);
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
 .navbar {
   justify-content: center;
   background-color: var(--poke-gray);
@@ -28,6 +41,7 @@ body {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, 1fr);
+  margin-bottom: 20px;
 }
   
 .list-group-item {
